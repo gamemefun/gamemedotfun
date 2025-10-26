@@ -1,0 +1,12 @@
+server {
+    listen 80;
+    server_name gameme.fun;
+    access_log /var/log/nginx/gameme.fun.site_access.log;
+    error_log /var/log/nginx/gameme.fun.site_error.log;
+
+    location / {
+        root /home/ubuntu/gamemedotfun/dist;
+        index index.html;
+        try_files $uri /index.html =404;
+    }
+}
