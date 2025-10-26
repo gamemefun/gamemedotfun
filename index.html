@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Games and Memes</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "VT323", monospace;
+        background-color: #000;
+        color: #e5e7eb;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        min-height: 100vh;
+      }
+
+      .app-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(
+          circle at center,
+          rgba(138, 43, 226, 0.1) 0,
+          rgba(138, 43, 226, 0) 50%
+        );
+        z-index: -10;
+      }
+
+      .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      @media (min-width: 640px) {
+        .container {
+          max-width: 640px;
+        }
+      }
+      @media (min-width: 768px) {
+        .container {
+          max-width: 768px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .container {
+          max-width: 1024px;
+        }
+      }
+      @media (min-width: 1280px) {
+        .container {
+          max-width: 1280px;
+        }
+      }
+
+      .header {
+        padding: 1rem;
+        border-bottom: 2px solid #4ade80;
+      }
+
+      @media (min-width: 768px) {
+        .header {
+          padding: 1.5rem;
+        }
+      }
+
+      .header-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-logo a {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .header-logo a:hover {
+        color: #ec4899;
+      }
+
+      .header-link {
+        display: none;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding: 0.5rem 1.5rem;
+        border: 2px solid #ec4899;
+        color: #ec4899;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+
+      .header-link:hover {
+        background-color: #ec4899;
+        color: #000;
+      }
+
+      @media (min-width: 768px) {
+        .header-link {
+          display: inline-block;
+        }
+      }
+
+      .main-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      @media (min-width: 768px) {
+        .main-content {
+          padding-top: 6rem;
+          padding-bottom: 6rem;
+        }
+      }
+
+      .section-padding {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      @media (min-width: 768px) {
+        .section-padding {
+          padding-top: 6rem;
+          padding-bottom: 6rem;
+        }
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .text-green {
+        color: #4ade80;
+      }
+      .text-pink {
+        color: #ec4899;
+      }
+      .text-purple {
+        color: #a855f7;
+      }
+      .text-gray {
+        color: #9ca3af;
+      }
+      .text-white {
+        color: #fff;
+      }
+
+      .border-green {
+        border-color: #4ade80;
+      }
+      .border-pink {
+        border-color: #ec4899;
+      }
+      .border-purple {
+        border-color: #a855f7;
+      }
+
+      .hero-section {
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        line-height: 1.1;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #fff;
+        letter-spacing: 0.05em;
+      }
+
+      @media (min-width: 768px) {
+        .hero-title {
+          font-size: 6rem;
+          line-height: 1;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .hero-title {
+          font-size: 7.5rem;
+          line-height: 1;
+        }
+      }
+
+      .hero-description {
+        max-width: 48rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: #9ca3af;
+      }
+
+      .hero-actions {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 640px) {
+        .hero-actions {
+          flex-direction: row;
+        }
+      }
+
+      .btn {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding: 1rem 2rem;
+        border-width: 2px;
+        border-style: solid;
+        text-decoration: none;
+        transition: all 0.2s;
+        width: 100%;
+      }
+
+      @media (min-width: 640px) {
+        .btn {
+          width: auto;
+        }
+      }
+
+      .btn-green {
+        border-color: #4ade80;
+        color: #4ade80;
+      }
+      .btn-green:hover {
+        background-color: #4ade80;
+        color: #000;
+      }
+
+      .btn-purple {
+        border-color: #a855f7;
+        color: #a855f7;
+      }
+      .btn-purple:hover {
+        background-color: #a855f7;
+        color: #000;
+      }
+
+      .btn-pink-large {
+        display: inline-block;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        padding: 1.5rem 3rem;
+        border: 2px solid #ec4899;
+        color: #ec4899;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .btn-pink-large:hover {
+        background-color: #ec4899;
+        color: #000;
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      @media (min-width: 768px) {
+        .section-title {
+          font-size: 3rem;
+          line-height: 1;
+        }
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .features-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .features-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      .feature-card {
+        border-width: 2px;
+        border-style: solid;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        background-color: rgb(17 24 39);
+      }
+
+      .feature-card-icon {
+        width: 3rem;
+        height: 3rem;
+      }
+
+      .feature-card-title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        color: #fff;
+      }
+
+      .feature-card-description {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        color: #9ca3af;
+      }
+
+      .process-container {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid #a855f7;
+      }
+
+      @media (min-width: 768px) {
+        .process-container {
+          flex-direction: row;
+        }
+      }
+
+      .process-step {
+        flex: 1 1 0%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-bottom: 2px solid #a855f7;
+      }
+
+      .process-step:last-child {
+        border-bottom: 0;
+      }
+
+      @media (min-width: 768px) {
+        .process-step {
+          border-bottom: 0;
+          border-right: 2px solid #a855f7;
+        }
+        .process-step:last-child {
+          border-right: 0;
+        }
+      }
+
+      .process-step-number {
+        font-size: 3.75rem;
+        line-height: 1;
+        font-weight: 700;
+        color: #a855f7;
+        margin-bottom: 1rem;
+      }
+
+      .process-step-title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        margin-bottom: 0.5rem;
+        color: #fff;
+      }
+
+      .process-step-description {
+        color: #9ca3af;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+
+      .token-grid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 1.5rem;
+        max-width: 56rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @media (min-width: 768px) {
+        .token-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .token-card {
+        border: 2px solid #4b5563;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: rgba(17, 24, 39, 0.5);
+        position: relative;
+        min-height: 150px;
+      }
+
+      .token-card-title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        color: #fff;
+      }
+
+      .token-card-ticker {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: #4ade80;
+        margin-top: 0.5rem;
+      }
+
+      .token-card-badge {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        background-color: #ec4899;
+        color: #000;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+
+      .cta-description {
+        max-width: 42rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.5rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: #9ca3af;
+      }
+
+      .cta-button-container {
+        margin-top: 2.5rem;
+      }
+
+      .footer {
+        border-top: 2px solid #4ade80;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .footer-text {
+        text-align: center;
+        color: #6b7280;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+
+      .footer-links a {
+        color: #6b7280;
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: #ec4899;
+      }
+
+      .footer-links a.footer-link-telegram:hover {
+        color: #4ade80;
+      }
+
+      .footer-links a.footer-link-github:hover {
+        color: #a855f7;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="app-container">
+        <div class="app-background"></div>
+
+        <header class="header">
+          <nav class="container header-nav">
+            <h1 class="header-logo">
+              <a href="https://pump.fun/profile/gamemefun"> gameme.fun </a>
+            </h1>
+            <a href="https://pump.fun/profile/gamemefun" class="header-link">
+              PumpFun
+            </a>
+          </nav>
+        </header>
+
+        <main class="container main-content">
+          <section class="hero-section section-padding">
+            <h2 class="hero-title">
+              No Rug Pulls.
+              <br />
+              <span class="text-green">Just Games & Memes.</span>
+            </h2>
+            <p class="hero-description">
+              The first truly fair launchpad for community-driven game and meme
+              tokens. Audited contracts, locked liquidity, and radical
+              transparency.
+            </p>
+            <div class="hero-actions">
+              <a href="#tokens" class="btn btn-green"> Explore Tokens </a>
+              <a
+                href="https://t.me/gamemefun"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-purple"
+              >
+                Join Telegram
+              </a>
+            </div>
+          </section>
+
+          <section class="section-padding">
+            <h3 class="section-title text-pink">// why us?</h3>
+            <div class="features-grid">
+              <div class="feature-card border-green">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feature-card-icon text-green"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+                <h3 class="feature-card-title">Rug-Proof</h3>
+                <p class="feature-card-description">
+                  All liquidity is locked on launch. Contracts are audited and
+                  open-source. Sleep easy.
+                </p>
+              </div>
+              <div class="feature-card border-pink">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feature-card-icon text-pink"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <h3 class="feature-card-title">Community First</h3>
+                <p class="feature-card-description">
+                  Tokens are owned by the community, not by anonymous devs. Your
+                  voice matters.
+                </p>
+              </div>
+              <div class="feature-card border-purple">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feature-card-icon text-purple"
+                >
+                  <path
+                    d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.3.05-3.1S5.21 15.66 4.5 16.5Z"
+                  />
+                  <path d="m12 15-3-3a6 6 0 0 1 3-10a6 6 0 0 1 10 3l-3 3" />
+                  <path d="m7 14 6-6" />
+                  <path d="m21 21-1.5-1.5" />
+                </svg>
+                <h3 class="feature-card-title">Fair Launches</h3>
+                <p class="feature-card-description">
+                  No pre-sales. No VC allocations. Everyone gets in on the
+                  ground floor, at the same time.
+                </p>
+              </div>
+              <div class="feature-card border-green">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feature-card-icon text-green"
+                >
+                  <path
+                    d="M14 7V4.7A2.3 2.3 0 0 0 11.7 2.3a2.4 2.4 0 0 0-2.4 2.4V7"
+                  />
+                  <path
+                    d="M18 12.3a2.4 2.4 0 0 0 2.4-2.4A2.3 2.3 0 0 0 18 7.6"
+                  />
+                  <path d="M11.7 21.7a2.3 2.3 0 0 1-2.4-2.4v-2.3" />
+                  <path
+                    d="M7 14h.3a2.3 2.3 0 0 0 2.3-2.3a2.4 2.4 0 0 0-2.4-2.4H7"
+                  />
+                  <path
+                    d="M17 14h.3a2.3 2.3 0 0 1 2.3 2.3v.4a2.3 2.3 0 0 1-2.3 2.3h-1.3a2.3 2.3 0 0 1-2.3-2.3V14"
+                  />
+                  <path
+                    d="M7 18.3a2.4 2.4 0 0 0-2.4 2.4A2.3 2.3 0 0 0 7 23h1"
+                  />
+                </svg>
+                <h3 class="feature-card-title">GameFi + Memes</h3>
+                <p class="feature-card-description">
+                  We merge the virality of memes with the utility of gaming. The
+                  next evolution of crypto.
+                </p>
+              </div>
+              <div class="feature-card border-pink">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feature-card-icon text-pink"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <h3 class="feature-card-title">Fair Dev Entry</h3>
+                <p class="feature-card-description">
+                  Devs kickstart with just 0.25 SOL. No pre-mine, no whale
+                  manipulation. Pure fairness from day one.
+                </p>
+              </div>
+              <div class="feature-card border-green">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feature-card-icon text-green"
+                >
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+                <h3 class="feature-card-title">Transparent Gaming</h3>
+                <p class="feature-card-description">
+                  All game contracts are open-source. Audit the code, understand
+                  the mechanics, and play with confidence.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-padding">
+            <h3 class="section-title text-green">// The Process</h3>
+            <div class="process-container">
+              <div class="process-step">
+                <div class="process-step-number">01</div>
+                <h4 class="process-step-title">DISCOVER</h4>
+                <p class="process-step-description">
+                  Browse upcoming fair launches. Read our transparent project
+                  analysis.
+                </p>
+              </div>
+              <div class="process-step">
+                <div class="process-step-number">02</div>
+                <h4 class="process-step-title">PARTICIPATE</h4>
+                <p class="process-step-description">
+                  Join the launch event at the specified time. No bots, no
+                  insiders.
+                </p>
+              </div>
+              <div class="process-step">
+                <div class="process-step-number">03</div>
+                <h4 class="process-step-title">PLAY & TRADE</h4>
+                <p class="process-step-description">
+                  Once launched, the token is live. Trade it, use it in-game,
+                  and govern the future.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="tokens" class="section-padding">
+            <h3 class="section-title text-pink">// Token Launchpad</h3>
+            <div class="token-grid">
+              <div class="token-card">
+                <div>
+                  <h4 class="token-card-title">Click and Earn</h4>
+                  <p class="token-card-ticker">$CAE</p>
+                </div>
+                <div class="token-card-badge">COMING SOON</div>
+              </div>
+              <div class="token-card">
+                <div>
+                  <h4 class="token-card-title">Farm and Earn</h4>
+                  <p class="token-card-ticker">$FAE</p>
+                </div>
+                <div class="token-card-badge">COMING SOON</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-padding text-center">
+            <h2 class="hero-title">Are You In?</h2>
+            <p class="cta-description">
+              Stop getting rekt. Join a platform that respects you and your
+              capital. The revolution will be fair launched.
+            </p>
+            <div class="cta-button-container">
+              <a
+                href="https://pump.fun/profile/gamemefun"
+                class="btn-pink-large"
+              >
+                Enter The Arena
+              </a>
+            </div>
+          </section>
+        </main>
+
+        <footer class="footer">
+          <div class="container">
+            <p class="footer-text">
+              &copy; <span id="current-year"></span> gameme.fun. All rights
+              reserved. Do your own research.
+            </p>
+            <div class="footer-links">
+              <a
+                href="https://x.com/gamemefun"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                X
+              </a>
+              <a
+                href="https://t.me/gamemefun"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-link-telegram"
+              >
+                Telegram
+              </a>
+              <a
+                href="https://github.com/gamemefun"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-link-github"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>
