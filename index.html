@@ -26,6 +26,18 @@
         font-size: 1.25rem;
         line-height: 1.75rem;
         min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      canvas {
+        width: 100%;
+        height: 300vh;
+        background: #000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -10;
+        pointer-events: none;
       }
 
       .app-background {
@@ -73,7 +85,7 @@
 
       .header {
         padding: 1rem;
-        border-bottom: 2px solid #4ade80;
+        /* border-bottom: 2px solid #4ade80; */
       }
 
       @media (min-width: 768px) {
@@ -213,7 +225,8 @@
         margin-top: 2rem;
         font-size: 1.5rem;
         line-height: 2rem;
-        color: #9ca3af;
+        color: #fff;
+        text-shadow: 1px 1px 10px #9ca3af ;
       }
 
       .hero-actions {
@@ -240,6 +253,8 @@
         text-decoration: none;
         transition: all 0.2s;
         width: 100%;
+
+        text-shadow: 1px 1px 15px  #7b7777;
       }
 
       @media (min-width: 640px) {
@@ -395,9 +410,10 @@
       }
 
       .process-step-description {
-        color: #9ca3af;
+        color: #fff;
         font-size: 1.25rem;
         line-height: 1.75rem;
+        text-shadow: 1px 1px 20px #9ca3af !important;
       }
 
       .token-grid {
@@ -462,7 +478,9 @@
         margin-top: 1.5rem;
         font-size: 1.5rem;
         line-height: 2rem;
-        color: #9ca3af;
+        color: #fff;
+        text-shadow: 1px 1px 20px #9ca3af !important;
+
       }
 
       .cta-button-container {
@@ -523,12 +541,6 @@
         border-width: 0.5vh;
         border-style: solid;
         height: 10px !important;
-      }
-
-      canvas {
-        width: 100%;
-        height: 100%;
-        background: #000;
       }
     </style>
   </head>
@@ -1082,40 +1094,6 @@
             </div>
           </section>
         </main>
-
-        <footer class="footer">
-          <div class="container">
-            <p class="footer-text">
-              &copy; <span id="current-year"></span> gameme.fun. All rights
-              reserved. Do your own research.
-            </p>
-            <div class="footer-links">
-              <a
-                href="https://x.com/gamemefun"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                X
-              </a>
-              <a
-                href="https://t.me/gamemefun"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="footer-link-telegram"
-              >
-                Telegram
-              </a>
-              <a
-                href="https://github.com/gamemefun"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="footer-link-github"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-        </footer>
       </div>
     </div>
     <script type="module" src="./src/index.ts"></script>
