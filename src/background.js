@@ -174,8 +174,10 @@ class createApp {
     this.camera2.setFocalLength(50);
     this.camera.position.z = 1;
     this.camera2.position.z = 0.015;
+    this.baseZoom = 0.015;
     this.controls = new OrbitControls(this.camera2);
     this.controls.enableRotate = false;
+    this.controls.enableZoom = false;
     this.target = new THREE.Vector3();
     this.scene = new THREE.Scene();
 
@@ -186,6 +188,7 @@ class createApp {
 
     window.addEventListener("resize", this.onResize.bind(this));
     window.addEventListener("mousemove", this.onMouseMove.bind(this));
+    window.addEventListener("scroll", this.onScroll.bind(this));
 
     this.rawCoords = [
       {
@@ -269,6 +272,12 @@ class createApp {
       screenRatio: new THREE.Vector3(1, -1, -1).unproject(this.camera),
     });
     //this.grid = new Grid({count: 10201, scene: this.scene, coords:this.treatedCoords, screenRatio: new THREE.Vector3(1, -1,-1).unproject(this.camera)})
+  }
+
+  onScroll() {
+    const scrollY = window.scrollY;
+    const breath = Math.sin(scrollY * 0.002) * 0.005;
+    this.camera2.position.z = this.baseZoom + breath;
   }
 
   onMouseMove(e) {
