@@ -38,6 +38,13 @@
         left: 0;
         z-index: -10;
         pointer-events: none;
+        left: -1100px;
+      }
+
+      @media (max-width: 1024px) {
+        canvas {
+          left: -1700px;
+        }
       }
 
       .app-background {
@@ -226,7 +233,7 @@
         font-size: 1.5rem;
         line-height: 2rem;
         color: #fff;
-        text-shadow: 1px 1px 10px #9ca3af ;
+        text-shadow: 1px 1px 10px #9ca3af;
       }
 
       .hero-actions {
@@ -254,7 +261,7 @@
         transition: all 0.2s;
         width: 100%;
 
-        text-shadow: 1px 1px 15px  #7b7777;
+        text-shadow: 1px 1px 15px #7b7777;
       }
 
       @media (min-width: 640px) {
@@ -480,7 +487,6 @@
         line-height: 2rem;
         color: #fff;
         text-shadow: 1px 1px 20px #9ca3af !important;
-
       }
 
       .cta-button-container {
