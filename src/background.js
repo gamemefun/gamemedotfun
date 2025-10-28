@@ -165,7 +165,7 @@ class SecondGrid {
 
 class createApp {
   constructor(opt) {
-    this.winWidth = window.innerWidth;
+    this.winWidth = 4000;
     this.winHeight = window.innerHeight;
     this.winRatio = this.winWidth / this.winHeight;
     this.camera = new THREE.PerspectiveCamera(50, this.winRatio, 0.005, 1000);
@@ -276,7 +276,10 @@ class createApp {
 
   onScroll() {
     const scrollY = window.scrollY;
-    const breath = Math.sin(scrollY * 0.002) * 0.005;
+    const breath = Math.sin(scrollY * 0.002) * 0.01;
+
+    console.log(breath)
+
     this.camera2.position.z = this.baseZoom + breath;
   }
 
@@ -289,7 +292,7 @@ class createApp {
   }
 
   onResize() {
-    this.winWidth = window.innerWidth;
+    this.winWidth = 4000;
     this.winHeight = window.innerHeight;
     this.winRatio = this.winWidth / this.winHeight;
     this.camera2.aspect = this.winRatio;
