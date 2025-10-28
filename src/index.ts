@@ -1,17 +1,31 @@
 import "./background.js";
 
+function copyContractAddress() {
+  const caElement = document.getElementById("contract-address") as HTMLElement;
+  const copyButton = document.querySelector(".copy-btn") as HTMLButtonElement;
+
+  if (!caElement || !copyButton) return;
+
+  let contractAddress = caElement.innerText;
+  if (contractAddress.startsWith("CA: ")) {
+    contractAddress = contractAddress.substring(4).trim();
+  }
+  navigator.clipboard.writeText(contractAddress).then(() => {
+    copyButton.innerText = "[COPIED!]";
+    copyButton.classList.add("copied");
+    copyButton.disabled = true;
+
+    setTimeout(() => {
+      copyButton.innerText = "[COPY]";
+      copyButton.classList.remove("copied");
+      copyButton.disabled = false;
+    }, 2000);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const yearSpan = document.getElementById("current-year");
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear().toString();
+  const copyButton = document.querySelector(".copy-btn") as HTMLButtonElement;
+  if (copyButton) {
+    copyButton.addEventListener("click", copyContractAddress);
   }
 });
-
-const canvas = document.querySelector("canvas");
-
-// window.addEventListener("resize", (ev: UIEvent) => {
-//   if (window.innerWidth < 1024) {
-//     canvas.width = 2000;
-//     canvas.height = 2000;
-//   }
-// });

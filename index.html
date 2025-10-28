@@ -552,6 +552,66 @@
         border-style: solid;
         height: 10px !important;
       }
+
+      .ca-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        border: 2px solid #4ade80;
+        background: #000;
+        padding: 0.75rem 1rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .ca {
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+        color: #4ade80;
+        word-break: break-all;
+      }
+
+      .copy-btn {
+        font-family: "VT323", monospace;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+
+        position: relative;
+        /* right: -55px; */
+
+        background-color: #ec4899;
+        color: #000;
+        border: 2px solid #ec4899;
+        padding: 0.5rem 1rem;
+
+        text-decoration: none;
+        transition: none;
+      }
+
+      .copy-btn:hover {
+        background-color: #000;
+        color: #ec4899;
+        border-color: #ec4899;
+      }
+
+      .copy-btn:active {
+        background-color: #4ade80;
+        color: #000;
+        border-color: #4ade80;
+        transform: translate(2px, 2px);
+      }
+
+      .copy-btn.copied {
+        background-color: #4ade80;
+        color: #000;
+        border-color: #4ade80;
+        pointer-events: none;
+      }
     </style>
   </head>
   <body>
@@ -835,6 +895,14 @@
               <br />
               <span class="text-green">Just Games & Memes.</span>
             </h2>
+
+            <div class="ca-container">
+              <span class="text-green ca" id="contract-address"
+                >CA: coming soon</span
+              >
+              <button class="copy-btn">[COPY]</button>
+            </div>
+
             <p class="hero-description">
               The first anti-rug launchpad on Pump.fun. We prove we can't dump
               on you by publicly buying & locking a small 0.5 SOL bag of every
